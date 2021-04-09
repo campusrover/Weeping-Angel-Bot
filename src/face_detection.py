@@ -7,37 +7,51 @@ from pynput.mouse import Button, Controller
 import keyboard
 import matplotlib.pyplot as plt
 
-def to_rgb(cref):
-    mask = 0xff
-    R = (cref & mask) / 255
-    G = ((cref >> 8) & mask) / 255
-    B = ((cref >> 16) & mask) / 255
-    return(R, G, B)
-
-def new_construct_window(bound_box):
+def new_construct_window(w, h):
+    bound_box = {'top' : 0, 'left' : 0, 'width' : w, 'height' : h}
     screenshot = np.array(mss().grab(bound_box))
-    # array = plt.imread(screenshot)
     return screenshot
 
+def color_2_gray(img):
+    return cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-def detect_faces(w,h, face_cascade):
-    x = (1920-w) // 2
-    y = (1080-h) // 2
-    bound_box = {'top' : y, 'left' : x, 'width' : w, 'height' : h}
-    window = new_construct_window(bound_box)
-    gray = cv2.cvtColor(window, cv2.COLOR_BGR2GRAY)
-    faces = face_cascade.detectMultiScale( gray, scaleFactor = 1.1, minNeighbors = 3, minSize = (20,20) )
+
+def detect_faces(gray_img):
+    face_cascade = cv2.CascadeClassifier('C:/Users/Adam/AppData/Local/Programs/Python/Python38/Lib/site-packages/cv2/data/haarcascade_frontalface_default.xml')
+    faces = face_cascade.detectMultiScale( gray_img, scaleFactor = 1.1, minNeighbors = 3, minSize = (100,100) )
+    return faces
+
+
+def draw_faces(img, faces):
     for (x, y, w, h) in faces:
-        cv2.rectangle(window,(x,y),(x+w,y+h),(255,0,0),2)
-    cv2.imshow('window', window)
+        cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)
+    return img
+
+
+def detect_people(gray_img):
+    hog = cv2.HOGDescriptor()
+    hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
+    people, _ = hog.detectMultiScale(gray_img, winStride=(10,10) )
+    return people
+
+def draw_people(img, people):
+    for (x, y, w, h) in people:
+        cv2.rectangle(img,(x,y),(x+w,y+h),(0,0,255),2)
+    return img
+
+def show_img(img):
+    cv2.imshow('Window', img)
     time.sleep(0.017)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
-if __name__ == '__main__':
-    face_cascade = cv2.CascadeClassifier('C:/Users/Adam/AppData/Local/Programs/Python/Python39/Lib/site-packages/cv2/data/haarcascade_frontalface_default.xml')
 
+if __name__ == '__main__':
     while not (keyboard.is_pressed("=")):
-        start = time.perf_counter()
-        coords = detect_faces(1920, 1080, face_cascade)
-        print(coords)
+        color_img = new_construct_window(1920,1080)
+        gray_img = color_2_gray(color_img)
+        faces = detect_faces(gray_img)
+        people = detect_people(gray_img)
+        finished_img = draw_faces(color_img, faces)
+        finished_img = draw_people(color_img, people)
+        show_img(finished_img)
