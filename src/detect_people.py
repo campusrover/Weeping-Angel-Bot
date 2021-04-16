@@ -37,17 +37,19 @@ class personDetector:
         self.color_img = self.bridge.imgmsg_to_cv2(color_img, 'bgr8')
 
     def detect_people(self):
-        
-        person_list = []
-        people, _ = self.hog.detectMultiScale(self.gray_img, winStride=(8,8), scale=1)
-        for (x, y, w, h) in people:
-            mass = w*h
-            person_list.append([x, mass])
-            cv2.rectangle(self.color_img,(x,y),(x+w,y+h),(0,0,255),2)
-        color_img_msg = self.bridge.cv2_to_imgmsg(self.color_img, 'bgr8')
-        self.img_pub.publish(color_img_msg)
-        self.person_arr.data = person_list
-        self.person_pub.publish(self.person_arr)
+        try:
+            person_list = []
+            people, _ = self.hog.detectMultiScale(self.gray_img, winStride=(8,8), scale=1)
+            for (x, y, w, h) in people:
+                mass = w*h
+                person_list.append([x, mass])
+                cv2.rectangle(self.color_img,(x,y),(x+w,y+h),(0,0,255),2)
+            color_img_msg = self.bridge.cv2_to_imgmsg(self.color_img, 'bgr8')
+            self.img_pub.publish(color_img_msg)
+            self.person_arr.data = person_list
+            self.person_pub.publish(self.person_arr)
+        except:
+            pass
 
 if __name__ == "__main__":
     
