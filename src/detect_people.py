@@ -39,7 +39,7 @@ class personDetector:
     def detect_people(self):
         try:
             person_list = []
-            people, _ = self.hog.detectMultiScale(self.gray_img, winStride=(8,8), scale=1)
+            people, _ = self.hog.detectMultiScale(self.gray_img, winStride=(4,4), scale=1.5)
             for (x, y, w, h) in people:
                 mass = w*h
                 person_list.append([x, mass])
