@@ -34,8 +34,7 @@ class pytorch_detector:
         img = self.bridge.imgmsg_to_cv2(img_msg, 'bgr8')
         self.detect(img)
 
-    def detect_essential(self, img):
-        boxes, labels, scores = self.model.simple_detection(img)
+    def publish_data(self, boxes, labels, scores):
         max_score = 0
         cX = None
         cY = None
@@ -47,7 +46,10 @@ class pytorch_detector:
                 max_score = scores[i]
             elif labels[i] == 2:
                 face_detected = True
-        person_msg = Int32MultiArray(data=[cX, cY])
+        if cX != None and cY != None:
+            person_msg = Int32MultiArray(data=[cX, cY])
+        else:
+            person_msg = Int32MultiArray(data=[-1, -1])
         face_msg = Bool(data=face_detected)
         self.person_pub.publish(person_msg)
         self.face_pub.publish(face_msg)
@@ -58,6 +60,7 @@ class pytorch_detector:
 
         try:
             boxes, labels, scores = self.model.simple_detection(img)
+            self.publish_data(boxes, labels, scores)
             for i, box in enumerate(boxes):
                 if scores[i] > 0.4:
                     if labels[i] == 1:
