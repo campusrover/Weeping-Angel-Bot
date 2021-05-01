@@ -1,12 +1,12 @@
 <launch>
   <arg name="model" default="waffle" doc="model type [burger, waffle, waffle_pi]"/>
   <arg name="x_pos" default="0.0"/>
-  <arg name="y_pos" default="8.0"/>
-  <arg name="z_pos" default="0.25"/>
+  <arg name="y_pos" default="-8.0"/>
+  <arg name="z_pos" default="1.0"/>
   <arg name="mode" default="day" doc="mode of the track to load, valid options are 'day' or 'night'"/>
 
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="$(find Term_Project)/world/gedit_walk.world"/>
+    <arg name="world_name" value="$(find Term_Project)/world/cafe.world"/>
     <arg name="paused" value="false"/>
     <arg name="use_sim_time" value="true"/>
     <arg name="gui" value="true"/>

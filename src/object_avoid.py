@@ -5,6 +5,7 @@ from sensor_msgs.msg import Image
 from sensor_msgs.msg import LaserScan
 from geometry_msgs.msg import Twist
 import numpy as np
+import random
 
 """
 NOTES:
@@ -123,7 +124,8 @@ class Follower:
             err = centroids[target][0] - w/2
             err = -float(err) / 1000
             self.last_side = centroids[target][0] >= w/2
-        
+        else:
+            err = min(max(random.uniform(-1, 1), -1), 1)
 
         self.control =  err
 
