@@ -44,6 +44,7 @@ class Follower:
             if prox_clear < 1:
                 temp_speed += -float(direction) * 2
 
+            print(direction)
             print("Object avoidance addition speed: ", temp_speed)
             self.go(temp_speed + self.control)
 
