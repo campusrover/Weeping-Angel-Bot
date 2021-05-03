@@ -21,7 +21,7 @@ class Follower:
         self.centroid_data = np.array([-1, -1])
         self.face = False
 
-    def scan_cb(self, msg, cone=90):
+    def scan_cb(self, msg, cone=100):
         if False:#self.face:
             self.go(0, speedlin=0)
             print("HUMAN SEES ME!!!!")
@@ -33,20 +33,28 @@ class Follower:
             np.clip(self.ranges, 0, 10, out=self.ranges)
 
             #Reformating the range data
-            left = np.min(self.ranges[360 - cone:])
-            right = np.min(self.ranges[:cone])
-            prox_clear = np.min(self.ranges[250:] + self.ranges[:110])
+            right = np.min(self.ranges[360 - cone:])
+            left = np.min(self.ranges[:cone])
+            prox_clear = min(np.min(self.ranges[250:]), np.min(self.ranges[:110]))
 
-            direction = int(right - left) + 1
+            direction = int(right - left)
 
-            if prox_clear < .5:
-                temp_speed += -float(direction) * np.pi
-            if prox_clear < 1:
-                temp_speed += -float(direction) * 2
+            if prox_clear < 1.5:
+                if prox_clear < .75:
+                    temp_speed += -float(direction) * np.pi
+                    print("CLOSE")
+                
+                temp_speed += -float(direction) * np.pi * (1 / prox_clear - .5)  + self.control
+                print("AVOIDING")
+            else:
+                temp_speed = self.control
+                print("FOLLOWING")
 
-            print(direction)
-            print("Object avoidance addition speed: ", temp_speed)
-            self.go(temp_speed + self.control)
+            print(left)
+            print(right)
+            print(prox_clear)
+            print("Speed: ", temp_speed)
+            self.go(temp_speed)
 
     def centroid_cd(self, centroids):
         self.centroid_data = np.array(centroids.data)
