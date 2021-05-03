@@ -41,16 +41,18 @@ the robot to wander around the map as if to search for new victims.
 
 3. Finally ***add stuff here for object avoidance***
 
-## Person/Face Detection Technology
+## How It Works
+
+### Person/Face Detection Technology
 
 * The person and face detection in this program is performed by a [FasterRCNN](https://arxiv.org/pdf/1506.01497.pdf) with a [ResNet-50](https://arxiv.org/pdf/1512.03385.pdf) as the backbone convolutional network.
 * The FasterRCNN is pretrained on the [COCO](https://cocodataset.org/#home) dataset, which contains thousands of images of objects from 80 different categories. Each object of a category in each image is annotated with a segmentation mask and a bounding box, as well as the category that it fits into. 
 * The FasterRCNN was fine-tuned on the [faces4coco](https://github.com/ACI-Institute/faces4coco) dataset, which annotates all of the COCO images with bounding boxes of only people and faces.
 * The FasterRCNN was trained on the validation set of the faces4coco dataset over 10 epochs on a RTX 2070 Super.
 
-## Object Avoidance
+### Object Avoidance
 
-## Control Flow
+### Control Flow
 
 ## Licence
 
