@@ -1,6 +1,6 @@
 # Weeping Angel Bot in Gazebo
 
-![alt text](https://images.amcnetworks.com/bbcamerica.com/wp-content/uploads/2012/08/weepingangels.jpg width="500" height="250")<img src="weepingangelGIF.gif"  width="500" height="250"/>
+<img src="weepingangels.jpg"  width="325" height="250"/>         <img src="weepingangelGIF.gif"  width="500" height="250"/>
 
 ## Overview
 
