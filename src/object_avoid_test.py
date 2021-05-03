@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import rospy, numpy
+import rospy, numpy, cv2, cv_bridge
 from sensor_msgs.msg import Image
 from sensor_msgs.msg import LaserScan
 from geometry_msgs.msg import Twist
@@ -11,8 +11,8 @@ from std_msgs.msg import Bool
 
 class Follower:
     def __init__(self):
-        self.person = rospy.Subscriber('/person_centroid', Int32MultiArray, self.centroid_cd)
-        self.face_bool = rospy.Subscriber('/face_detected', Bool, self.face_cd)
+        self.bridge = cv_bridge.CvBridge()
+        self.image_sub = rospy.Subscriber('camera/rgb/image_raw', Image, self.image_callback)
         self.scan_sub = rospy.Subscriber('scan', LaserScan, self.scan_cb)
         self.cmd_vel_pub = rospy.Publisher('cmd_vel', Twist, queue_size=1)
         self.ranges = None
@@ -57,6 +57,35 @@ class Follower:
         self.centroid_data = np.array(centroids.data)
         resolution = [1080, 1920, 0]
         self.centroid_processor(self.centroid_data, resolution)
+
+    def image_callback(self, msg):
+
+        # get image from camera
+        image = self.bridge.imgmsg_to_cv2(msg)
+
+        # filter out everything that's not yellow
+        hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+        lower_yellow = numpy.array([ 36, 0, 0])
+        upper_yellow = numpy.array([ 70, 255, 255])
+        mask = cv2.inRange(hsv,  lower_yellow, upper_yellow)
+        masked = cv2.bitwise_and(image, image, mask=mask)
+
+        h, w, d = image.shape
+        cv2.imshow("band", mask)
+
+    # Compute the "centroid" and display a red circle to denote it
+        M = cv2.moments(mask)
+
+        if M['m00'] > 0:
+            cx = int(M['m10']/M['m00'])
+            cy = int(M['m01']/M['m00'])
+            cv2.circle(image, (cx, cy), 20, (0,0,255), -1)
+            self.centroid_data = np.array([cx, cy])
+            resolution = image.shape
+            self.centroid_processor(self.centroid_data, resolution)
+
+        cv2.imshow("image", image)
+        cv2.waitKey(3)
     
     def face_cd(self, Bool):
         self.face = Bool.data
