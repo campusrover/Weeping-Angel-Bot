@@ -64,7 +64,7 @@ the robot to wander around the map as if to search for new victims.
 * If the model detects any people in the image, then the detection node will select the person detected with the highest prediction score and then calculate the center point of the bounding box and publish it as a topic.
 * If the model detects any faces in the image, then the detection node will publish a boolean topic named `face_detected` as `True`. Otherwise, it will publish `face_detected` as `False`.
 
-### Object Avoidance
+### Control Flow
 
 #### Person Following
 
@@ -79,10 +79,6 @@ the robot to wander around the map as if to search for new victims.
 * The program checks to see if there are any obstacles in front of the robot and compensates according.
 * This is achieved by using the LIDAR data to check the forward, left, and right regions of the robot. If an obstacle is detected in the forwards region, based off of the left and right data, the robot will gradually turn to try and avoid the object.
 * If the program is also designed to accomodate the tacking data too. As both the object avoidance adjustments works in tandem to influence the robot, this is broken only if the robot's trajectory is within too close of proximity to an obstacle.
-
-### Control Flow
-
-
 
 ## Licence
 
