@@ -18,3 +18,11 @@ to the image topic produced by the robot's camera, and processes it using a conv
 node detects a person, but not a face in the robot's camera image it will publish cmd_vel topics to the robot that tell it to follow the person. If the node detects a face in the
 camera image, it will publish cmd_vel commands telling the robot to stop in place. If the robot detects no people or faces in the camera image, it will publish commands that tell
 the robot to wander around the map as if to search for new victims.
+
+## Installation
+
+- In order to run this program, you will need to be running an Ubuntu 18.04 environment with ROS Melodic installed. It is recommended to have CUDA 10.1 installed in order to run the image processing with GPU acceleration.
+- Open a terminal with a path to your catkin workspace src folder, and <code/>git clone https://github.com/campusrover/Weeping-Angel-Bot.git<code>. Rename the folder created from <code/>Weeping-Angel-Bot<code> to <code>Term_Project<code/>.
+- <code/>pip install torch torchvision<code> and then <code/>pip install future<code>
+- Create a new folder in your <code/>Term_Project<code> folder and name it <code/>torch_model<code>
+- Download the [model weights]https://drive.google.com/file/d/1n1nBDpdu9GnAb006depSl32x6O47NU_D/view for the neural network.
