@@ -38,9 +38,9 @@ class Follower:
             right = self.ranges[cone:4*cone]
             direction = int(np.amin(right) - np.amin(left)) + 1
 
-            if np.amin(front) < 0.5:
+            if np.amin(front) < 1:
                 temp_speed += -float(direction) * np.pi * 2
-            if np.amin(front) < 2:
+            if np.amin(front) < 3:
                 temp_speed += -float(direction) * 2 + self.control
             else:
                 temp_speed = self.control
