@@ -52,6 +52,7 @@ class Follower:
 
             print("Speed: ", temp_speed)
             self.go(temp_speed)
+            self.control = 0
 
     def centroid_cd(self, centroids):
         self.centroid_data = np.array(centroids.data)
@@ -70,7 +71,7 @@ class Follower:
             err = centroids[0] - w/2
             err = -float(err) / 1000
         else:
-            err = min(max(random.uniform(-10, 10), -6), 6)
+            err = min(max(random.uniform(-10, 10), -3), 3)
 
         self.control =  err
 
