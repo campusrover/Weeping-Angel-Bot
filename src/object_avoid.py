@@ -11,9 +11,11 @@ from std_msgs.msg import Bool
 
 class Follower:
     def __init__(self):
+        self.scan_sub = rospy.Subscriber('scan', LaserScan, self.scan_cb)
+
         self.person = rospy.Subscriber('/person_centroid', Int32MultiArray, self.centroid_cd)
         self.face_bool = rospy.Subscriber('/face_detected', Bool, self.face_cd)
-        self.scan_sub = rospy.Subscriber('scan', LaserScan, self.scan_cb)
+
         self.cmd_vel_pub = rospy.Publisher('cmd_vel', Twist, queue_size=1)
         self.ranges = None
         self.twist = Twist()
