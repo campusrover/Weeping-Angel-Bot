@@ -21,7 +21,7 @@ class Follower:
         self.centroid_data = np.array([-1, -1])
         self.face = False
 
-    def scan_cb(self, msg, cone=15):
+    def scan_cb(self, msg, cone=90):
         if self.face:
             self.go(0, speedlin=0)
             print("HUMAN SEES ME!!!!")
@@ -33,9 +33,8 @@ class Follower:
             np.clip(self.ranges, 0, 10, out=self.ranges)
 
             #Reformating the range data
-            left = np.min(self.ranges[360 - 4*cone:360 - cone])
-            front = np.min(self.ranges[360 - cone:] + self.ranges[:cone])
-            right = np.min(self.ranges[cone:4*cone])
+            left = np.min(self.ranges[360 - cone:])
+            right = np.min(self.ranges[:cone])
             prox_clear = np.min(self.ranges[250:] + self.ranges[:110])
 
             direction = int(right - left) + 1
