@@ -33,20 +33,6 @@ class Follower:
             np.clip(self.ranges, 0, 10, out=self.ranges)
 
             #Reformating the range data
-<<<<<<< HEAD
-            right = np.min(self.ranges[360 - cone:])
-            left = np.min(self.ranges[:cone])
-            prox_clear = min(np.min(self.ranges[250:]), np.min(self.ranges[:110]))
-
-            direction = int(right - left)
-
-            if prox_clear < 1.5:
-                if prox_clear < .75:
-                    temp_speed += -float(direction) * np.pi
-                    print("CLOSE")
-                
-                temp_speed += -float(direction) * np.pi * (1 / prox_clear - .5)  + self.control
-=======
             right = np.min(self.ranges[360 - cone: 360 - cone/6])
             left = np.min(self.ranges[cone/6 :cone])
             front = min(np.min(self.ranges[360 - cone/6:]), np.min(self.ranges[:cone/6]))
@@ -59,18 +45,11 @@ class Follower:
                     print("CLOSE")
                 
                 temp_speed += -float(direction) + self.control
->>>>>>> 42a57ab6b11976a9c8cee5a22d651fe9fd937e30
                 print("AVOIDING")
             else:
                 temp_speed = self.control
                 print("FOLLOWING")
 
-<<<<<<< HEAD
-            print(left)
-            print(right)
-            print(prox_clear)
-=======
->>>>>>> 42a57ab6b11976a9c8cee5a22d651fe9fd937e30
             print("Speed: ", temp_speed)
             self.go(temp_speed)
 
