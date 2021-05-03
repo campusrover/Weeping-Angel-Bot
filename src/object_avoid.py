@@ -21,7 +21,7 @@ class Follower:
         self.centroid_data = np.array([-1, -1])
         self.face = False
 
-    def scan_cb(self, msg, cone=30):
+    def scan_cb(self, msg, cone=15):
         if self.face:
             self.go(0, speedlin=0)
             print("HUMAN SEES ME!!!!")
@@ -43,7 +43,7 @@ class Follower:
             if prox_clear < .5:
                 temp_speed += -float(direction) * np.pi
             if prox_clear < 1:
-                temp_speed += -float(direction)
+                temp_speed += -float(direction) * 2
 
             print("Object avoidance addition speed: ", temp_speed)
             self.go(temp_speed + self.control)
