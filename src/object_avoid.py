@@ -36,18 +36,17 @@ class Follower:
             left = np.min(self.ranges[360 - 4*cone:360 - cone])
             front = np.min(self.ranges[360 - cone:] + self.ranges[:cone])
             right = np.min(self.ranges[cone:4*cone])
+            prox_clear = np.min(self.ranges[250:] + self.ranges[:110])
 
             direction = int(right - left) + 1
 
-            if front < .5 or right < .5 or left < .5:
+            if prox_clear < .5:
                 temp_speed += -float(direction) * np.pi * 2
-            if front < 2 or right < 2 or left < 2:
-                temp_speed += -float(direction) * 2 + self.control
-            else:
-                temp_speed = self.control
+            if prox_clear < 1:
+                temp_speed += -float(direction) * 2
 
             print("Object avoidance addition speed: ", temp_speed)
-            self.go(temp_speed)
+            self.go(temp_speed + self.control)
 
     def centroid_cd(self, centroids):
         self.centroid_data = np.array(centroids.data)
