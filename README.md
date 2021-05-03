@@ -21,8 +21,10 @@ the robot to wander around the map as if to search for new victims.
 
 ## Installation
 
-- In order to run this program, you will need to be running an Ubuntu 18.04 environment with ROS Melodic installed. It is recommended to have CUDA 10.1 installed in order to run the image processing with GPU acceleration.
-- Open a terminal with a path to your catkin workspace src folder, and <code/>git clone https://github.com/campusrover/Weeping-Angel-Bot.git<code>. Rename the folder created from <code/>Weeping-Angel-Bot<code> to <code>Term_Project<code/>.
-- <code/>pip install torch torchvision<code> and then <code/>pip install future<code>
-- Create a new folder in your <code/>Term_Project<code> folder and name it <code/>torch_model<code>
-- Download the [model weights]https://drive.google.com/file/d/1n1nBDpdu9GnAb006depSl32x6O47NU_D/view for the neural network.
+* In order to run this program, you will need to be running an Ubuntu 18.04 environment with ROS Melodic installed. It is recommended to have CUDA 10.1 installed in order to run the image processing with GPU acceleration.
+* Open a terminal with a path to your catkin workspace src folder, and `git clone https://github.com/campusrover/Weeping-Angel-Bot.git`. Rename the folder created from `Weeping-Angel-Bot` to `Term_Project`.
+* `pip install torch torchvision<code>` and then `pip install future`.
+* Create a new folder in your `Term_Project` folder and name it `torch_model`
+* Download the [model weights]https://drive.google.com/file/d/1n1nBDpdu9GnAb006depSl32x6O47NU_D/view for the neural network.
+
+
