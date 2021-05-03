@@ -26,7 +26,7 @@ the robot to wander around the map as if to search for new victims.
 * `pip install torch torchvision` and then `pip install future`.
 * Create a new folder in your `Term_Project` folder and name it `torch_model`
 * Download the [model weights](https://drive.google.com/file/d/1n1nBDpdu9GnAb006depSl32x6O47NU_D/view) for the neural network. Move `model_state_dict.pth` into the `torch_model` folder.
-* Return to your `catkin_ws` folder and call `catkin_make` in the terminal, and you will be ready to use the program!
+* Return to your `catkin_ws` folder and call `catkin_make` in the terminal.
 
 ## Usage
 
