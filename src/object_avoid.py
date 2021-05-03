@@ -36,6 +36,9 @@ class Follower:
             left = self.ranges[360 - 4*cone:360 - cone]
             front = self.ranges[360 - cone:] + self.ranges[:cone]
             right = self.ranges[cone:4*cone]
+            print(left)
+            print(front)
+            print(right)
             direction = int(np.amin(right) - np.amin(left)) + 1
 
             if np.amin(front) < 1:
