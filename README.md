@@ -49,6 +49,10 @@ the robot to wander around the map as if to search for new victims.
 * The FasterRCNN is pretrained on the [COCO](https://cocodataset.org/#home) dataset, which contains thousands of images of objects from 80 different categories. Each object of a category in each image is annotated with a segmentation mask and a bounding box, as well as the category that it fits into. 
 * The FasterRCNN was fine-tuned on the [faces4coco](https://github.com/ACI-Institute/faces4coco) dataset, which annotates all of the COCO images with bounding boxes of only people and faces.
 * The FasterRCNN was trained on the validation set of the faces4coco dataset over 10 epochs on a RTX 2070 Super.
+* In the program, the model is loaded from pytorch and then the pretrained weights are imported from `model_state_dict.pth`.
+* The detection node subscribes to the image topic published by the robot's camera, and then the image is passed through the model. The model outputs 3 arrays which contain bounding boxes of the objects in the image, prediction scores for those objects, and then category labels for the objects detected.
+* If the model detects any people in the image, then the detection node will select the person detected with the highest prediction score and then calculate the center point of the bounding box and publish it as a topic.
+* If the model detects any faces in the image, then the detection node will publish a boolean topic named `face_detected` as `True`. Otherwise, it will publish `face_detected` as `False`.
 
 ### Object Avoidance
 
