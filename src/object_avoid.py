@@ -33,17 +33,15 @@ class Follower:
             np.clip(self.ranges, 0, 10, out=self.ranges)
 
             #Reformating the range data
-            left = self.ranges[360 - 4*cone:360 - cone]
-            front = self.ranges[360 - cone:] + self.ranges[:cone]
-            right = self.ranges[cone:4*cone]
-            print(np.amin(right))
-            print(np.amin(front))
-            print(np.amin(left))
-            direction = int(np.amin(right) - np.amin(left)) + 1
+            left = np.min(self.ranges[360 - 4*cone:360 - cone])
+            front = np.min(self.ranges[360 - cone:] + self.ranges[:cone])
+            right = np.min(self.ranges[cone:4*cone])
 
-            if np.amin(front) < 1:
+            direction = int(right - left) + 1
+
+            if front < .5 or right < .5 or left < .5:
                 temp_speed += -float(direction) * np.pi * 2
-            if np.amin(front) < 3:
+            if front < 2 or right < 2 or left < 2:
                 temp_speed += -float(direction) * 2 + self.control
             else:
                 temp_speed = self.control
