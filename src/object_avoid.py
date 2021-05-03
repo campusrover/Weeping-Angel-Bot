@@ -22,7 +22,7 @@ class Follower:
         self.face = False
 
     def scan_cb(self, msg, cone=90):
-        if self.face:
+        if False:#self.face:
             self.go(0, speedlin=0)
             print("HUMAN SEES ME!!!!")
         else:
