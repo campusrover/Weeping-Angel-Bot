@@ -71,7 +71,7 @@ class Follower:
             err = centroids[0] - w/2
             err = -float(err) / 1000
         else:
-            err = min(max(random.uniform(-10, 10), -3), 3)
+            err = min(max(random.uniform(-10, 10), -1), 1)
 
         self.control =  err
 
