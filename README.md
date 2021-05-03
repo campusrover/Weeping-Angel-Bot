@@ -34,7 +34,7 @@ the robot to wander around the map as if to search for new victims.
 * In a different terminal with the same path run the command `rosrun Term_Project pytorch_detection.py` to start the neural network detector node.
 * Finally ***add stuff here for object avoidance***
 
-## How the Person/Face detection works
+## Person/Face Detection Technology
 
 * The person and face detection in this program is performed by a [FasterRCNN](https://arxiv.org/pdf/1506.01497.pdf) with a [ResNet-50](https://arxiv.org/pdf/1512.03385.pdf) as the backbone convolutional network.
 * The FasterRCNN is pretrained on the [COCO](https://cocodataset.org/#home) dataset, which contains thousands of images of objects from 80 different categories. Each object of a category in each image is annotated with a segmentation mask and a bounding box, as well as the category that it fits into. 
