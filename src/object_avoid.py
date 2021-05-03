@@ -41,9 +41,9 @@ class Follower:
             direction = int(right - left) + 1
 
             if prox_clear < .5:
-                temp_speed += -float(direction) * np.pi * 2
+                temp_speed += -float(direction) * np.pi
             if prox_clear < 1:
-                temp_speed += -float(direction) * 2
+                temp_speed += -float(direction)
 
             print("Object avoidance addition speed: ", temp_speed)
             self.go(temp_speed + self.control)
