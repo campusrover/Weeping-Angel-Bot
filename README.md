@@ -2,7 +2,7 @@
 
 <img src="weepingangels.jpg"  width="325" height="250"/>         <img src="weepingangelGIF.gif"  width="500" height="250"/>
 
-## [Github Pages](https://github.com/Aringan0323/weepingangelbot.github.io)
+## [Github Pages](https://aringan0323.github.io/weepingangelbot.github.io/)
 
 ## Overview
 
