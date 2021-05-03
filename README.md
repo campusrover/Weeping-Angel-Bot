@@ -9,7 +9,7 @@ I will provide a brief explanation of the functionality of the robot.
 
 Or goal for this project was to recreate the behavior of the Weeping Angel from Doctor Who. The Weeping Angel monster is a large stone statue of an angel-like creature which
 looks relatively inconspicuous at first glance. However, when one looks away from this statue, it will come to life and chase the victim down, sending it back in time when it
-reaches them. While inventing a time machine for this project proved to be a bit harder than we thought, we were able to implement physical the behavior of the Weeping Angel 
+reaches them. While inventing a time machine for this project proved to be a bit harder than we thought, we were able to implement the physical behavior of the Weeping Angel 
 monster in the setting of a Gazebo simulation with a humanoid model and a Turtlebot3 Waffle simulated robot. 
 
 In the simulation, we have a Turtlebot3 Waffle robot with a camera
