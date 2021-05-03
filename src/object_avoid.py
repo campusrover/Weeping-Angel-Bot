@@ -63,7 +63,7 @@ class Follower:
         if not np.array_equal(centroids, [-1, -1]):
             print("Person location: ", centroids)
             err = centroids[0] - w/2
-            err = -float(err) / 1000
+            err = -float(err) / 500
             print("Current turn speed: ", err)
         else:
             err = min(max(random.uniform(-1, 1), -1), 1)
