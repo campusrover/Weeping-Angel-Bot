@@ -21,10 +21,21 @@ the robot to wander around the map as if to search for new victims.
 
 ## Installation
 
-* In order to run this program, you will need to be running an Ubuntu 18.04 environment with ROS Melodic installed. It is recommended to have CUDA 10.1 installed in order to run the image processing with GPU acceleration.
+* In order to run this program, you will need to be running an Ubuntu 18.04 environment with ROS Melodic installed. It is recommended to have CUDA 10.1 installed in order to run the image processing with GPU acceleration. Instructions for installing CUDA 10.1 on Ubuntu 18.04 can be found [here](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html).
 * Open a terminal with a path to your catkin workspace src folder, and `git clone https://github.com/campusrover/Weeping-Angel-Bot.git`. Rename the folder created from `Weeping-Angel-Bot` to `Term_Project`.
 * `pip install torch torchvision` and then `pip install future`.
 * Create a new folder in your `Term_Project` folder and name it `torch_model`
 * Download the [model weights](https://drive.google.com/file/d/1n1nBDpdu9GnAb006depSl32x6O47NU_D/view) for the neural network. Move `model_state_dict.pth` into the `torch_model` folder.
+* Return to your `catkin_ws` folder and call `catkin_make` in the terminal, and you will be ready to use the program!
+
+## Usage
+
+* Navigate to your `catkin_ws` folder in a terminal and run the command `roslaunch Term_Project weeping_angel.launch`. The gazebo simulation should launch.
+* In a different terminal with the same path run the command `rosrun Term_Project pytorch_detection.py` to start the neural network detector node.
+* Finally ***add stuff here for object avoidance***
+
+## How the Person/Face detection works
+
+
 
 
