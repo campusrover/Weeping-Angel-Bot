@@ -76,11 +76,18 @@ the robot to wander around the map as if to search for new victims.
 #### Obstacle Avoidance
 
 * The obstacle avoidance in this program uses the LIDAR data published by the robot's on-board LIDAR.
-* The 
+* The program checks to see if there are any obstacles in front of the robot and compensates according.
+* This is achieved by using the LIDAR data to check the forward, left, and right regions of the robot. If an obstacle is detected in the forwards region, based off of the left and right data, the robot will gradually turn to try and avoid the object.
+* If the program is also designed to accomodate the tacking data too. As both the object avoidance adjustments works in tandem to influence the robot, this is broken only if the robot's trajectory is within too close of proximity to an obstacle.
 
 ### Control Flow
 
-
+1. The robot subscribes to the Person/Face detection code
+2. The robot recieves LIDAR data about the area
+3. The Preson/Face detections returns person location
+4. The Stops if face is detected, else it will start detecting obstacles
+5. If an obstacle is found, it will turn to avoid the object while trying to maintain view of the person, however, if the robot is too close and is in danger of a collision, the robot will ignore person location and turn
+6. Repeat
 
 ## Licence
 
