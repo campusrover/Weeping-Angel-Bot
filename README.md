@@ -2,6 +2,8 @@
 
 <img src="weepingangels.jpg"  width="325" height="250"/>         <img src="weepingangelGIF.gif"  width="500" height="250"/>
 
+### See [Github Pages Site](https://aringan0323.github.io/weepingangelbot.github.io/) for more details on this project.
+
 ## Overview
 
 If you have ever watched the beloved sci-fi television show Doctor Who, you already know exactly what this robot does! But if you have not seen the show,
