@@ -1,4 +1,5 @@
 # Weeping Angel Bot in Gazebo
+## By Nathan Cai and Adam Ring
 
 <img src="weepingangels.jpg"  width="325" height="250"/>         <img src="weepingangelGIF.gif"  width="500" height="250"/>
 
