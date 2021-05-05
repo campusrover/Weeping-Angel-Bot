@@ -96,5 +96,10 @@ the robot to wander around the map as if to search for new victims.
 
 The MIT License (MIT) 
 
+## Links to Lab Notebook Entries
+
+- Adam Ring: [Saving and Loading Pytorch Models](https://campus-rover.gitbook.io/lab-notebook/advanced-topics/computer-vision/pretrained-model-deployment)
+- Nathan Cai: [Spawning Animated Human](https://campus-rover.gitbook.io/lab-notebook/faq/spawning_animated_human)
+
 
 
