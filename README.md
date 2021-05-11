@@ -22,7 +22,7 @@ node detects a person, but not a face in the robot's camera image it will publis
 camera image, it will publish cmd_vel commands telling the robot to stop in place. If the robot detects no people or faces in the camera image, it will publish commands that tell
 the robot to wander around the map as if to search for new victims.
 
-## Installation
+## Installation (Old)
 
 1. In order to run this program, you will need to be running an Ubuntu 18.04 environment with ROS Melodic installed. It is recommended to have CUDA 10.1 installed in order to run the image processing with GPU acceleration. Instructions for installing CUDA 10.1 on Ubuntu 18.04 can be found [here](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html).
 
@@ -33,6 +33,21 @@ the robot to wander around the map as if to search for new victims.
 4. Create a new folder in your `Term_Project` folder and name it `torch_model`
 
 5. Download the [model weights](https://drive.google.com/file/d/1n1nBDpdu9GnAb006depSl32x6O47NU_D/view) for the neural network. Move `model_state_dict.pth` into the `torch_model` folder.
+
+6. Return to your `catkin_ws` folder and call `catkin_make` in the terminal.
+
+## Installation (Updated)
+
+
+1. In order to run this program, you will need to be running an Ubuntu 18.04 environment with ROS Melodic installed. It is recommended to have CUDA 10.1 installed in order to run the image processing with GPU acceleration. Instructions for installing CUDA 10.1 on Ubuntu 18.04 can be found [here](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html).
+
+2. Open a terminal with a path to your catkin workspace src folder, and `git clone https://github.com/campusrover/Weeping-Angel-Bot.git`. Rename the folder created from `Weeping-Angel-Bot` to `Term_Project`.
+
+3. Run the commands `pip install torch torchvision`, `pip install future` and then `pip install typing`.
+
+4. Create a new folder in your `Term_Project` folder and name it `torch_model`
+
+5. Download the [model weights](https://drive.google.com/file/d/1Z896xM4eIf6pd-g54yUqheyyl4G7r8A_/view?usp=sharing) for the neural network. Move `mobilenet_v3_state_dict.pth` into the `torch_model` folder.
 
 6. Return to your `catkin_ws` folder and call `catkin_make` in the terminal.
 
@@ -48,9 +63,21 @@ the robot to wander around the map as if to search for new victims.
 
 ### Person/Face Detection Technology
 
-#### Model Training
+#### Model Training (Old)
 
 * The person and face detection in this program is performed by a [FasterRCNN](https://arxiv.org/pdf/1506.01497.pdf) with a [ResNet-50](https://arxiv.org/pdf/1512.03385.pdf) as the backbone convolutional network.
+* The FasterRCNN is pretrained on the [COCO](https://cocodataset.org/#home) dataset, which contains thousands of images of objects from 80 different categories. Each object of a category in each image is annotated with a segmentation mask and a bounding box, as well as the category that it fits into. 
+* The FasterRCNN was fine-tuned on the [faces4coco](https://github.com/ACI-Institute/faces4coco) dataset, which annotates all of the COCO images with bounding boxes of only people and faces.
+* The FasterRCNN was trained on the validation set of the faces4coco dataset over 10 epochs.
+* System Specs
+  - AMD Ryzen9 3950x
+  - RTX 2070 Super
+  - 32GB DDR4
+  - 2TB Nvme M.2 SSD
+
+#### Model Training (Updated)
+
+* The person and face detection in this program is performed by a [FasterRCNN](https://arxiv.org/pdf/1506.01497.pdf) with a [MobileNet V3](https://arxiv.org/pdf/1905.02244.pdf) as the backbone convolutional network.
 * The FasterRCNN is pretrained on the [COCO](https://cocodataset.org/#home) dataset, which contains thousands of images of objects from 80 different categories. Each object of a category in each image is annotated with a segmentation mask and a bounding box, as well as the category that it fits into. 
 * The FasterRCNN was fine-tuned on the [faces4coco](https://github.com/ACI-Institute/faces4coco) dataset, which annotates all of the COCO images with bounding boxes of only people and faces.
 * The FasterRCNN was trained on the validation set of the faces4coco dataset over 10 epochs.
