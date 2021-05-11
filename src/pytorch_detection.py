@@ -17,7 +17,7 @@ class pytorch_detector:
 
         self.bridge = CvBridge()
         
-        self.model = FaceRCNN()
+        self.model = FaceRCNN(mobile_net=True)
 
         self.img_sub = rospy.Subscriber('/camera/rgb/image_raw', Image, self.img_cb)
 

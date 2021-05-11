@@ -10,76 +10,71 @@
 # for this project.
 # Link: https://drive.google.com/file/d/1n1nBDpdu9GnAb006depSl32x6O47NU_D/view?usp=sharing 
 
+
+
+
+
+
+
 import torch
 import torchvision
+from functools import partial
+from torch import nn, Tensor
+from torch.nn import functional as F
+from typing import Any, Callable, Dict, List, Optional, Sequence
+from torchvision.models.utils import load_state_dict_from_url
 from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
+from torchvision.models.detection import FasterRCNN 
+from torchvision.models.detection.rpn import AnchorGenerator
 import numpy as np
 import pickle
 import os
 from time import time
+import io
+
+from mobilenetv3 import mobilenetv3_small
+
 
 
 class FaceRCNN:
 
 
-    def load_model_txt(self, model, path):
-        data_dict = {}
-        fin = open(path, 'r')
-        i = 0
-        odd = 1
-        prev_key = None
-        while True:
-            s = fin.readline().strip()
-            if not s:
-                break
-            if odd:
-                prev_key = s
-            else:
-                print('iter{}'.format(i))
-
-                val = eval(s)
-                if type(val) != type([]):
-                    data_dict[prev_key] = torch.FloatTensor([eval(s)])[0]
-                else:
-                    data_dict[prev_key] = torch.FloatTensor(eval(s))
-                i += 1
-            odd = (odd + 1) % 2
-
-        # Replace existing values with loaded
-
-        print('Loading...')
-        own_state = model.state_dict()
-        print('Items:', len(own_state.items()))
-        for k, v in data_dict.items():
-            if not k in own_state:
-                print('Parameter', k, 'not found in own_state!!!')
-            else:
-                try:
-                    own_state[k].copy_(v)
-                except:
-                    print('Key:', k)
-                    print('Old:', own_state[k])
-                    print('New:', v)
-                    sys.exit(0)
-        print('Model loaded')
-        torch.save(model.state_dict(), 'src/Term_Project/torch_model/model_state_dict.pt')
-
-
-    def __init__(self):
+    def __init__(self, mobile_net=True):
 
         # print(os.getcwd())
 
         self.device = torch.device('cuda:0') if torch.cuda.is_available() else torch.device('cpu')
         print("Model is running on {}".format(self.device))
-        
-        self.model = torchvision.models.detection.fasterrcnn_resnet50_fpn(pretrained=False)
-        # get number of input features for the classifier
-        in_features = self.model.roi_heads.box_predictor.cls_score.in_features
-        # replace the pre-trained head with a new one
-        self.model.roi_heads.box_predictor = FastRCNNPredictor(in_features, 3)
 
-        # Load the pretrained weights of the model from the downloaded file.
-        self.model.load_state_dict(torch.load('src/Term_Project/torch_model/model_state_dict.pth'))
+        if mobile_net:
+
+            backbone = mobilenetv3_small()
+            # state_dict = torch.load('src/Term_Project/torch_model/mobilenetv3smallpretrained.pth')
+            # backbone.load_state_dict(state_dict)
+            backbone = backbone.features
+
+            backbone.out_channels=96
+            anchor_generator = AnchorGenerator(sizes=((32, 64, 128, 256, 512),),
+                                   aspect_ratios=((0.5, 1.0, 2.0),))
+            roi_pooler = torchvision.ops.MultiScaleRoIAlign(featmap_names=['0'],
+                                                output_size=7,
+                                                sampling_ratio=2)
+            model = FasterRCNN(backbone,
+                   num_classes=3,
+                   rpn_anchor_generator=anchor_generator,
+                   box_roi_pool=roi_pooler)
+            state_dict = torch.load('src/Term_Project/torch_model/mobilenet_v3_state_dict.pth')
+            model.load_state_dict(state_dict)
+            self.model = model
+        else:
+            self.model = torchvision.models.detection.fasterrcnn_resnet50_fpn(pretrained=False)
+            # get number of input features for the classifier
+            in_features = self.model.roi_heads.box_predictor.cls_score.in_features
+            # replace the pre-trained head with a new one
+            self.model.roi_heads.box_predictor = FastRCNNPredictor(in_features, 3)
+
+            # Load the pretrained weights of the model from the downloaded file.
+            self.model.load_state_dict(torch.load('src/Term_Project/torch_model/model_state_dict.pth'))
 
         self.model.to(self.device)
         self.model.eval()

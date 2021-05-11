@@ -1,13 +1,16 @@
 # Weeping Angel Bot in Gazebo
+## By Nathan Cai and Adam Ring
 
 <img src="weepingangels.jpg"  width="325" height="250"/>         <img src="weepingangelGIF.gif"  width="500" height="250"/>
+
+### See [Github Pages Site](https://aringan0323.github.io/weepingangelbot.github.io/) for more details on this project.
 
 ## Overview
 
 If you have ever watched the beloved sci-fi television show Doctor Who, you already know exactly what this robot does! But if you have not seen the show,
 I will provide a brief explanation of the functionality of the robot.
 
-Or goal for this project was to recreate the behavior of the Weeping Angel from Doctor Who. The Weeping Angel monster is a large stone statue of an angel-like creature which
+Our goal for this project was to recreate the behavior of the Weeping Angel from Doctor Who. The Weeping Angel monster is a large stone statue of an angel-like creature which
 looks relatively inconspicuous at first glance. However, when one looks away from this statue, it will come to life and chase the victim down, sending it back in time when it
 reaches them. While inventing a time machine for this project proved to be a bit harder than we thought, we were able to implement the physical behavior of the Weeping Angel 
 monster in the setting of a Gazebo simulation with a humanoid model and a Turtlebot3 Waffle simulated robot. 
@@ -76,15 +79,27 @@ the robot to wander around the map as if to search for new victims.
 #### Obstacle Avoidance
 
 * The obstacle avoidance in this program uses the LIDAR data published by the robot's on-board LIDAR.
-* The 
+* The program checks to see if there are any obstacles in front of the robot and compensates according.
+* This is achieved by using the LIDAR data to check the forward, left, and right regions of the robot. If an obstacle is detected in the forwards region, based off of the left and right data, the robot will gradually turn to try and avoid the object.
+* If the program is also designed to accomodate the tacking data too. As both the object avoidance adjustments works in tandem to influence the robot, this is broken only if the robot's trajectory is within too close of proximity to an obstacle.
 
 ### Control Flow
 
-
+1. The robot subscribes to the Person/Face detection code
+2. The robot recieves LIDAR data about the area
+3. The Preson/Face detections returns person location
+4. The Stops if face is detected, else it will start detecting obstacles
+5. If an obstacle is found, it will turn to avoid the object while trying to maintain view of the person, however, if the robot is too close and is in danger of a collision, the robot will ignore person location and turn
+6. Repeat
 
 ## Licence
 
 The MIT License (MIT) 
+
+## Links to Lab Notebook Entries
+
+- Adam Ring: [Saving and Loading Pytorch Models](https://campus-rover.gitbook.io/lab-notebook/advanced-topics/computer-vision/pretrained-model-deployment)
+- Nathan Cai: [Spawning Animated Human](https://campus-rover.gitbook.io/lab-notebook/faq/spawning_animated_human)
 
 
 
