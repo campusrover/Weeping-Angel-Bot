@@ -80,7 +80,7 @@ the robot to wander around the map as if to search for new victims.
 * The person and face detection in this program is performed by a [FasterRCNN](https://arxiv.org/pdf/1506.01497.pdf) with a [MobileNet V3](https://arxiv.org/pdf/1905.02244.pdf) as the backbone convolutional network.
 * The FasterRCNN is pretrained on the [COCO](https://cocodataset.org/#home) dataset, which contains thousands of images of objects from 80 different categories. Each object of a category in each image is annotated with a segmentation mask and a bounding box, as well as the category that it fits into. 
 * The FasterRCNN was fine-tuned on the [faces4coco](https://github.com/ACI-Institute/faces4coco) dataset, which annotates all of the COCO images with bounding boxes of only people and faces.
-* The FasterRCNN was trained on the validation set of the faces4coco dataset over 10 epochs.
+* The FasterRCNN with the MobileNet V3 backbone was trained on the validation set of the faces4coco dataset over 30 epochs.
 * System Specs
   - AMD Ryzen9 3950x
   - RTX 2070 Super
