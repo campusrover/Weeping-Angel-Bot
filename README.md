@@ -5,6 +5,10 @@
 
 ### See [Github Pages Site](https://aringan0323.github.io/weepingangelbot.github.io/) for more details on this project.
 
+## Updated Model
+
+Due to computational constraints on the virtual machine that this project was running on, we have changed the backbone of the person/face detection model from a ResNet-50 to a MobileNet V3 which runs significantly faster. This has caused some of the instructions and descriptions to change on our project.
+
 ## Overview
 
 If you have ever watched the beloved sci-fi television show Doctor Who, you already know exactly what this robot does! But if you have not seen the show,
