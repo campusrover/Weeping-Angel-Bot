@@ -65,7 +65,7 @@ class pytorch_detector:
                 if scores[i] > 0.4:
                     if labels[i] == 1:
                         cv2.rectangle(img, (int(box[0]), int(box[1])), (int(box[2]), int(box[3])), (255,0,0), 4)
-                    else:
+                    elif labels[i] == 2:
                         cv2.rectangle(img, (int(box[0]), int(box[1])), (int(box[2]), int(box[3])), (0,0,255), 4)
             imgmsg = self.bridge.cv2_to_imgmsg(img, 'bgr8')
             self.img_pub.publish(imgmsg)

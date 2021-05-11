@@ -23,7 +23,7 @@ class Follower:
 
     def scan_cb(self, msg, cone=100):
         #print(msg.ranges)
-        if False:#self.face:
+        if self.face:
             self.go(0, speedlin=0)
             print("HUMAN SEES ME!!!!")
         else:
