@@ -72,7 +72,7 @@ class FaceRCNN:
                    num_classes=3,
                    rpn_anchor_generator=anchor_generator,
                    box_roi_pool=roi_pooler)
-            state_dict = torch.load('src/Term_Project/torch_model/mobilenet_v3_state_dict.pth')
+            state_dict = torch.load('src/Term_Project/torch_model/mobilenet_v3_state_dict.pth', map_location=torch.device('cpu'))
             model.load_state_dict(state_dict)
             self.model = model
         else:

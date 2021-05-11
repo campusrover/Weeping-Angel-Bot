@@ -22,6 +22,7 @@ class Follower:
         self.face = False
 
     def scan_cb(self, msg, cone=100):
+        #print(msg.ranges)
         if False:#self.face:
             self.go(0, speedlin=0)
             print("HUMAN SEES ME!!!!")
@@ -36,10 +37,11 @@ class Follower:
             right = np.min(self.ranges[360 - cone: 360 - cone/6])
             left = np.min(self.ranges[cone/6 :cone])
             front = min(np.min(self.ranges[360 - cone/6:]), np.min(self.ranges[:cone/6]))
+            close = min(np.min(self.ranges[360 - 90]), np.min(self.ranges[:90]))
 
-            direction = int(right - left) + 0.25
+            direction = int(right - left) + 0.1
 
-            if front < 1.5:
+            if front < 1.5 or close < 0.25:
                 if front < .75:
                     temp_speed += -float(direction) - self.control
                     print("CLOSE")
@@ -69,7 +71,7 @@ class Follower:
         if not np.array_equal(centroids, [-1, -1]):
             print("Person location: ", centroids)
             err = centroids[0] - w/2
-            err = -float(err) / 1000
+            err = -float(err) / 1200
         else:
             err = min(max(random.uniform(-10, 10), -1), 1)
 
