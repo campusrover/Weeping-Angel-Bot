@@ -21,13 +21,8 @@ class Follower:
         self.centroid_data = np.array([-1, -1])
         self.face = False
 
-<<<<<<< HEAD
     def scan_cb(self, msg, cone=100):
         if False:#self.face:
-=======
-    def scan_cb(self, msg, cone=90):
-        if self.face:
->>>>>>> 2d78ed097123ae1b462234a6766a37154cacdf07
             self.go(0, speedlin=0)
             print("HUMAN SEES ME!!!!")
         else:

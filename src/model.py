@@ -8,7 +8,16 @@
 # The file for the state dictionary for the model exceeds github's file size limit, so go to the following
 # link to download the state dictionary. Make sure it is put in a folder named "torch_model" in the main folder
 # for this project.
+
 # Link: https://drive.google.com/file/d/1n1nBDpdu9GnAb006depSl32x6O47NU_D/view?usp=sharing 
+
+### UPDATE:
+# We found that the resnet-50 is highly inefficient on the cpu that this tends to run on, so we implemented the mobilenet_v3 to 
+# do the same task with faster performance. This will now be the default model and the state dict can be downloaded from the following link. 
+# Follow the same instructions for installation as with the previous model. 
+
+# Link: 
+
 
 
 
